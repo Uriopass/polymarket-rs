@@ -140,7 +140,8 @@ impl MarketWsClient {
                     }
 
                     // Skip PING/PONG messages sent as text (some servers do this)
-                    if trimmed.eq_ignore_ascii_case("ping") || trimmed.eq_ignore_ascii_case("pong") {
+                    if trimmed.eq_ignore_ascii_case("ping") || trimmed.eq_ignore_ascii_case("pong")
+                    {
                         return None;
                     }
 
@@ -164,8 +165,10 @@ impl MarketWsClient {
                         Ok(event) => Some(Ok(event)),
                         Err(e) => {
                             // Log unexpected message format for debugging
-                            eprintln!("Unexpected WebSocket message (first 200 chars): {}",
-                                     &text.chars().take(200).collect::<String>());
+                            log::warn!(
+                                "Unexpected WebSocket message (first 200 chars): {}",
+                                &text.chars().take(200).collect::<String>()
+                            );
                             Some(Err(Error::Json(e)))
                         }
                     }
@@ -260,7 +263,8 @@ impl MarketWsClient {
                     }
 
                     // Skip PING/PONG messages sent as text (some servers do this)
-                    if trimmed.eq_ignore_ascii_case("ping") || trimmed.eq_ignore_ascii_case("pong") {
+                    if trimmed.eq_ignore_ascii_case("ping") || trimmed.eq_ignore_ascii_case("pong")
+                    {
                         return None;
                     }
 
@@ -284,8 +288,10 @@ impl MarketWsClient {
                         Ok(event) => Some(Ok(event)),
                         Err(e) => {
                             // Log unexpected message format for debugging
-                            eprintln!("Unexpected WebSocket message (first 200 chars): {}",
-                                     &text.chars().take(200).collect::<String>());
+                            log::warn!(
+                                "Unexpected WebSocket message (first 200 chars): {}",
+                                &text.chars().take(200).collect::<String>()
+                            );
                             Some(Err(Error::Json(e)))
                         }
                     }
